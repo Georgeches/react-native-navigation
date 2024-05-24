@@ -2,7 +2,6 @@ import { View, Text, SafeAreaView, StyleSheet, Image, TouchableOpacity, Pressabl
 import data from "../data";
 import { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function Profile(){
 
@@ -12,12 +11,6 @@ export default function Profile(){
 
     useLayoutEffect(()=>{
         navigation.setOptions({
-            headerShown: true,
-            headerLeft: ()=>(
-                <Pressable onPress={()=>navigation.openDrawer()} style={{marginLeft: 20}}>
-                    <FontAwesome6 name="bars" size={20} color="black" />
-                </Pressable>
-            )
         })
     }, [])
 

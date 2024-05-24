@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
@@ -15,6 +15,8 @@ import Settings from "./screens/Settings";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import FollowersScreen from "./screens/Followers";
 import FollowingScreen from "./screens/Following";
+import { FontAwesome6 } from '@expo/vector-icons';
+import { Pressable } from "react-native";
 
 const Tab = createBottomTabNavigator()
 
@@ -35,7 +37,11 @@ const MessagesStack = () => {
 
 const ProfileTopTabGroup = () => {
     return(
-        <TopTab.Navigator>
+        <TopTab.Navigator screenOptions={{
+            tabBarStyle: {
+                paddingTop: 50
+            }
+        }}>
             <TopTab.Screen name='main' component={Profile} options={{title: 'Profile'}}/>
             <TopTab.Screen name="Followers" component={FollowersScreen}/>
             <TopTab.Screen name="Following" component={FollowingScreen}/>
@@ -44,6 +50,7 @@ const ProfileTopTabGroup = () => {
 }
 
 const HomeTabGroup = () => {
+    const navigation = useNavigation()
     return(
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -71,6 +78,11 @@ const HomeTabGroup = () => {
             }}/>
             <Tab.Screen name="Profile" component={ProfileTopTabGroup} options={{
                 headerShown: false,
+                // headerLeft: ()=>(
+                //     <Pressable onPress={()=>navigation.openDrawer()} style={{marginLeft: 20}}>
+                //         <FontAwesome6 name="bars" size={20} color="black" />
+                //     </Pressable>
+                // ),
                 tabBarIcon: ({focused}) => focused?(
                     <FontAwesome name="user-circle-o" size={24} color="black" />
                 ):(
